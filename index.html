@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono&display=swap" rel="stylesheet">
+    <title>Cert Calc</title>
+</head>
+<body>
+    <div class="app">
+        <p class="date"></p>
+        <div class="main">
+            <div class="country">
+                <p>UK</p>
+                <p>Ireland</p>
+                <p>Australia</p>
+            </div>
+            <div class="inputs">
+                <input class="uk" type="number" value="" oninput="updateCurrent()">
+                <input class="ir" type="number" value="" oninput="updateCurrent()">
+                <input class="au" type="number" value="" oninput="updateCurrent()">
+                <p class="current">0</p>
+                <button onclick="save()" class="save-button">Save</button>
+            </div>
+        </div>
+        <div class="saved-data"></div>
+        <div class="total"></div>
+    </div>    
+    <script src="main.js"></script>
+</body>
+</html>

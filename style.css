@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Azeret Mono', monospace;
+}
+
+body {
+    margin: 10px;
+    background-color: rgb(48,48,48);
+    color: white;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    margin-bottom: 15px;
+}
+
+.main {
+    display: flex;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    margin-left: 15px;
+}
+
+.save-button {
+    margin-top: 5px;
+}
+
+.saved-data {
+    margin-top: 25px;
+}
+
+.total {
+    margin-top: 10px;
+}
