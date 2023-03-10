@@ -22,17 +22,28 @@ body {
 
 .main {
     display: flex;
+    flex-direction: column;
+    width: 250px;;
 }
 
-.inputs {
-    display: flex;
-    flex-direction: column;
-    width: 40px;
-    margin-left: 15px;
+.uk, .ir, .au {
+    width: 50px;
+    margin-left: 25px;
+}
+
+.date-input {
+    width: 117px;
+    margin-top: 10px;
+}
+
+.current {
+    margin-left: 10px;
 }
 
 .save-button {
     margin-top: 5px;
+    margin-left: 67px;
+    width: 50px;
 }
 
 .saved-data {
