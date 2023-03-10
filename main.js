@@ -1,8 +1,18 @@
-// BUG: Displayed saved data not being listed in chronological order // Being displayed in order they were stored in the local storage
-// SOLUTION: Modified the displayedSavedData() to first extract all the data from the local storage, sort them by date, and then display them in the sorted order (Line 52)
+/*
 
-// BUG: Empty input boxes returns NaN // parseInt function returns NaN since it's unable to parse the input as an integer
-// SOLUTION: Added Number.isInteger method to displayedSavedData() to check whether each input value can be parsed as an integer. If it can, the value is added to the total variable, otherwise it is ignored (Line 52)
+03/11/23
+CHANGES: Modified the updateCurrent() to use the logical OR (`||`) operator to set the value to 0 if the input is empty before parsing it, so user doesn't need to put 0 manually just to get the total automatically calculated (Line 39)
+
+BUG 1.3: User reported that she lost all of her saved data after we fixed BUG 1.1 // BUG 1.1's solution deleted the stored data in the local storage
+SOLUTION: Added a feature where in user can select a date manually and save the data with the selected date. Not selecting a date is the current date as default (Line 44)
+
+BUG 1.2: Empty input boxes returns NaN // parseInt function returns NaN since it's unable to parse the input as an integer
+SOLUTION: Added Number.isInteger method to displayedSavedData() to check whether each input value can be parsed as an integer. If it can, the value is added to the total variable, otherwise it is ignored. (Line 52)
+
+BUG 1.1: Displayed saved data not being listed in chronological order // Being displayed in order they were stored in the local storage
+SOLUTION: Modified the displayedSavedData() to first extract all the data from the local storage, sort them by date, and then display them in the sorted order (Line 52)
+
+*/
 
 document.addEventListener('DOMContentLoaded', function() {
   let data = {
@@ -18,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let ukInput = document.querySelector(".uk");
   let irInput = document.querySelector(".ir");
   let auInput = document.querySelector(".au");
+  let dateInput = document.querySelector(".date-input");
 
   document.querySelector('.date').textContent = data.currentDate.toLocaleString(); 
   setInterval(function() {
@@ -26,21 +37,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 1000);
 
   function updateCurrent() {
-    if (ukInput.value !== "" && irInput.value !== "" && auInput.value !== "") {
-      let currentValue = parseInt(ukInput.value) + parseInt(irInput.value) + parseInt(auInput.value);
-      current.textContent = currentValue.toLocaleString();
-    } else {
-      current.textContent = "0";
-    }
+    let ukValue = ukInput.value || 0;
+    let irValue = irInput.value || 0;
+    let auValue = auInput.value || 0;
+  
+    let currentValue = parseInt(ukValue) + parseInt(irValue) + parseInt(auValue);
+    current.textContent = currentValue.toLocaleString();
   }
+  
 
   function save() {
+    let selectedDate = dateInput.value;
+    let currentDate = new Date();
+    
+    if (selectedDate === '') {
+      selectedDate = currentDate.toISOString()
+    }
+    
     let data = {
       uk: ukInput.value,
       ir: irInput.value,
       au: auInput.value,
       current: current.textContent,
-      date: new Date().toISOString()
+      date: selectedDate
     };
   
     let savedData = JSON.parse(localStorage.getItem('savedData')) || [];
@@ -48,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('savedData', JSON.stringify(savedData));
     displaySavedData();
   }
+  
   
   function displaySavedData() {
     let parent = document.querySelector('.saved-data');
@@ -121,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }  
 
   document.querySelector('.save-button').addEventListener('click', save);
-  document.querySelectorAll('.inputs input').forEach(input => {
+  document.querySelectorAll('.main').forEach(input => {
     input.addEventListener('input', updateCurrent);
   });
 
