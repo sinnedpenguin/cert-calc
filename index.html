@@ -12,18 +12,12 @@
     <div class="app">
         <p class="date"></p>
         <div class="main">
-            <div class="country">
-                <p>UK</p>
-                <p>Ireland</p>
-                <p>Australia</p>
-            </div>
-            <div class="inputs">
-                <input class="uk" type="number" value="" oninput="updateCurrent()">
-                <input class="ir" type="number" value="" oninput="updateCurrent()">
-                <input class="au" type="number" value="" oninput="updateCurrent()">
-                <p class="current">0</p>
-                <button onclick="save()" class="save-button">Save</button>
-            </div>
+            <div>UK: <input class="uk" type="number" value="" oninput="updateCurrent()"></div>
+            <div>IR: <input class="ir" type="number" value="" oninput="updateCurrent()"></div>
+            <div>AU: <input class="au" type="number" value="" oninput="updateCurrent()"></div>
+            <div>Total: <span class="current">0</span></div>
+            <button onclick="save()" class="save-button">Save</button>
+            <input type="date" class="date-input">
         </div>
         <div class="saved-data"></div>
         <div class="total"></div>
